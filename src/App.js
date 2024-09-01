@@ -24,17 +24,30 @@ function App() {
     // Attempt to open the Amazon app using the URI scheme
     // window.location.href = amazonUri;
     window.location.replace(amazonUri);
+    clearHistory();
     // Redirect to fallback URL after a short delay if the app is not installed
     // setTimeout(() => {
     //   alert('set timeout...')
     //   window.location.href = fallbackUrl;
     // }, 1000); // Adjust the timeout duration if necessary
   };
+
+  function clearHistory() {
+    // Push an empty state to clear URL fragment
+    window.history.pushState({}, '', '/');
+    
+    // Push another state to ensure URL is reset
+    window.history.pushState({}, '', '/');
+    
+    // Remove the current state from history
+    window.history.go(-1);
+  }
+  
   
 
   return (
     <div className="App">
-      <p>Market 00</p>
+      <p>Market 0011</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
