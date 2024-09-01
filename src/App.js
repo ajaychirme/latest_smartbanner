@@ -7,7 +7,8 @@ function App() {
     if (/android/i.test(navigator.userAgent)) {
       // window.location.href = "intent://amazon.com/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
       // window.location.href = "intent://amazon.in/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
-      window.location.href = "intent://com.amazon.mShop.android.shopping/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+      //window.location.href = "intent://com.amazon.mShop.android.shopping/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+      window.location.href = "market://details?id=com.amazon.mShop.android.shopping";
     } else {
       // Fallback or message for non-Android users
       alert("This action is only supported on Android devices.");
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className="App">
+      <p>Market</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
