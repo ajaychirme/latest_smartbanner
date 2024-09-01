@@ -4,18 +4,30 @@ import "./App.css";
 function App() {
 
   const handleOpen = () => {
-    if (/android/i.test(navigator.userAgent)) {
-      // Attempt to open the Amazon app
-      window.location.href = "intent://com.amazon.mShop.android.shopping/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+    // if (/android/i.test(navigator.userAgent)) {
+    //   // Attempt to open the Amazon app
+    //   window.location.href = "intent://com.amazon.mShop.android.shopping/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
   
-      // Fallback to Play Store if the app isn't opened
-      setTimeout(() => {
-        window.location.href = "market://details?id=com.amazon.mShop.android.shopping";
-      }, 2000); // Delay before fallback
-    } else {
-      // Redirect to Amazon India website for non-Android users
-      window.location.href = "https://www.amazon.in";
-    }
+    //   // Fallback to Play Store if the app isn't opened
+    //   setTimeout(() => {
+    //     window.location.href = "market://details?id=com.amazon.mShop.android.shopping";
+    //   }, 2000); // Delay before fallback
+    // } else {
+    //   // Redirect to Amazon India website for non-Android users
+    //   window.location.href = "https://www.amazon.in";
+    // }
+
+    const amazonUri = 'amazon://';
+    // Define the fallback URL (e.g., a specific product page on Amazon)
+    const fallbackUrl = 'https://www.amazon.com/dp/B08J5F3G18'; // Replace with your product URL or relevant Amazon page
+
+    // Attempt to open the Amazon app using the URI scheme
+    window.location.href = amazonUri;
+
+    // Redirect to fallback URL after a short delay if the app is not installed
+    setTimeout(() => {
+      window.location.href = fallbackUrl;
+    }, 1000); // Adjust the timeout duration if necessary
   };
   
 
