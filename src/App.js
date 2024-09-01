@@ -17,13 +17,13 @@ function App() {
     //   window.location.href = "https://www.amazon.in";
     // }
 
-    const totumUri = 'totum://';
+    const amazonUri = 'amazon://';
     // Define the fallback URL (e.g., a specific product page on Amazon)
     const fallbackUrl = 'https://www.amazon.com/dp/B08J5F3G18'; // Replace with your product URL or relevant Amazon page
 
     // Attempt to open the Amazon app using the URI scheme
     // window.location.href = amazonUri;
-    window.location.href=totumUri;
+    window.location.replace(amazonUri);
     // Redirect to fallback URL after a short delay if the app is not installed
     // setTimeout(() => {
     //   alert('set timeout...')
@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      <p>Market 0</p>
+      <p>Market 00</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
