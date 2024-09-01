@@ -23,7 +23,7 @@ function App() {
 
     // Attempt to open the Amazon app using the URI scheme
     // window.location.href = amazonUri;
-    window.location.replace(totumUri);
+    window.location.href=totumUri;
     // Redirect to fallback URL after a short delay if the app is not installed
     // setTimeout(() => {
     //   alert('set timeout...')
