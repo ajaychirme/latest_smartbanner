@@ -6,7 +6,8 @@ function App() {
   const handleOpen = () => {
     if (/android/i.test(navigator.userAgent)) {
       // window.location.href = "intent://amazon.com/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
-      window.location.href = "intent://amazon.in/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+      // window.location.href = "intent://amazon.in/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+      window.location.href = "intent://com.amazon.mShop.android.shopping/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
     } else {
       // Fallback or message for non-Android users
       alert("This action is only supported on Android devices.");
