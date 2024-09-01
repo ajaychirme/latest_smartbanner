@@ -25,16 +25,16 @@ function App() {
     window.location.href = amazonUri;
 
     // Redirect to fallback URL after a short delay if the app is not installed
-    setTimeout(() => {
-      alert('set timeout...')
-      window.location.href = fallbackUrl;
-    }, 1000); // Adjust the timeout duration if necessary
+    // setTimeout(() => {
+    //   alert('set timeout...')
+    //   window.location.href = fallbackUrl;
+    // }, 1000); // Adjust the timeout duration if necessary
   };
   
 
   return (
     <div className="App">
-      <p>Market 1</p>
+      <p>Market 145</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
