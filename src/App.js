@@ -26,6 +26,7 @@ function App() {
 
     // Redirect to fallback URL after a short delay if the app is not installed
     setTimeout(() => {
+      alert('set timeout...')
       window.location.href = fallbackUrl;
     }, 1000); // Adjust the timeout duration if necessary
   };
