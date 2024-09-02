@@ -3,24 +3,24 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  const [applist, setApplist] = useState([]);
+  // const [applist, setApplist] = useState([]);
 
   useEffect(() => {
     // Check if the 'getInstalledRelatedApps' API is supported
     if ('getInstalledRelatedApps' in navigator) {
       navigator.getInstalledRelatedApps().then(apps => {
-        if (apps.length > 0) {
-          setApplist(apps);
-        } else {
-          setApplist([]);
-        }
+        // if (apps.length > 0) {
+        //   setApplist(apps);
+        // } else {
+        //   setApplist([]);
+        // }
       }).catch(err => {
         console.error("Error fetching installed apps:", err);
-        setApplist([]);
+        // setApplist([]);
       });
     } else {
       console.log("getInstalledRelatedApps is not supported");
-      setApplist([]);
+      // setApplist([]);
     }
   }, []);
 
@@ -40,21 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <p>Market android check nxtr added</p>
-      <p>Applist:</p>
-      {applist.length > 0 ? (
-        <ul>
-          {applist.map((app, index) => (
-            <li key={index}>
-              <strong>Platform:</strong> {app.platform} <br />
-              <strong>URL:</strong> {app.url} <br />
-              <strong>ID:</strong> {app.id}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No related apps are installed.</p>
-      )}
+      <p>Market android check nxtr added revert</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt="App Logo"
