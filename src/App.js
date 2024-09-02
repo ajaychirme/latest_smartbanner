@@ -17,7 +17,7 @@ function App() {
     //   window.location.href = "https://www.amazon.in";
     // }
 
-    const amazonUri = 'amazon://';
+    const amazonUri = 'nxtr://nux.new.user.joinus';
     // Define the fallback URL (e.g., a specific product page on Amazon)
     const fallbackUrl = 'https://www.amazon.com/dp/B08J5F3G18'; // Replace with your product URL or relevant Amazon page
 
@@ -35,19 +35,15 @@ function App() {
   function clearHistory() {
     // Push an empty state to clear URL fragment
     window.history.pushState({}, '', '/');
-    
     // Push another state to ensure URL is reset
     window.history.pushState({}, '', '/');
-    
     // Remove the current state from history
     window.history.go(-1);
   }
-  
-  
 
   return (
     <div className="App">
-      <p>Market 0011</p>
+      <p>Market android check</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
