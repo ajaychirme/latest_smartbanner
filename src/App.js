@@ -47,9 +47,8 @@ function App() {
 
   return (
     <div className="App">
-      <p>Market android check nxtr added</p>
-      <p>Applist is === {applist}</p>
-      <img
+      <p>Market android check nxtr1223 added</p>
+=      <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
       />
