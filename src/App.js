@@ -55,7 +55,7 @@ function App() {
       <div className="button-container">
         {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
         <button className="btn2" onClick={handleOpen}>
-          Open the app
+          Install / Open
         </button>
       </div>
     </div>
