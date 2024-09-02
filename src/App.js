@@ -1,28 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
   // const [applist, setApplist] = useState([]);
-
-  useEffect(() => {
-    // Check if the 'getInstalledRelatedApps' API is supported
-    if ('getInstalledRelatedApps' in navigator) {
-      navigator.getInstalledRelatedApps().then(apps => {
-        // if (apps.length > 0) {
-        //   setApplist(apps);
-        // } else {
-        //   setApplist([]);
-        // }
-      }).catch(err => {
-        console.error("Error fetching installed apps:", err);
-        // setApplist([]);
-      });
-    } else {
-      console.log("getInstalledRelatedApps is not supported");
-      // setApplist([]);
-    }
-  }, []);
 
   const handleOpen = () => {
     const amazonUri = 'intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;';
