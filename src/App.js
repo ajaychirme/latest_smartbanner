@@ -1,7 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [applist, setApplist] = useState([])
 
   const handleOpen = () => {
     // if (/android/i.test(navigator.userAgent)) {
@@ -17,7 +19,10 @@ function App() {
     //   window.location.href = "https://www.amazon.in";
     // }
 
-    const amazonUri = 'nxtr://nux.new.user.joinus';
+    // const amazonUri = 'nxtr://nux.new.user.joinus';
+
+    const amazonUri='intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;'
+
     // Define the fallback URL (e.g., a specific product page on Amazon)
     const fallbackUrl = 'https://www.amazon.com/dp/B08J5F3G18'; // Replace with your product URL or relevant Amazon page
 
@@ -43,7 +48,8 @@ function App() {
 
   return (
     <div className="App">
-      <p>Market android check</p>
+      <p>Market android check nxtr added</p>
+      <p>Applist is === {applist}</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
