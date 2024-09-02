@@ -1,61 +1,78 @@
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
 
 function App() {
+  const [applist, setApplist] = useState([]);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
 
-  const handleOpen = () => {
-    // if (/android/i.test(navigator.userAgent)) {
-    //   // Attempt to open the Amazon app
-    //   window.location.href = "intent://com.amazon.mShop.android.shopping/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
-  
-    //   // Fallback to Play Store if the app isn't opened
-    //   setTimeout(() => {
-    //     window.location.href = "market://details?id=com.amazon.mShop.android.shopping";
-    //   }, 2000); // Delay before fallback
-    // } else {
-    //   // Redirect to Amazon India website for non-Android users
-    //   window.location.href = "https://www.amazon.in";
-    // }
+  useEffect(() => {
+    // Check if the 'getInstalledRelatedApps' API is supported
+    if ('getInstalledRelatedApps' in navigator) {
+      navigator.getInstalledRelatedApps().then(apps => {
+        if (apps.length > 0) {
+          setApplist(apps);
+          setIsAppInstalled(true);
+        } else {
+          setApplist([]);
+          setIsAppInstalled(false);
+        }
+      }).catch(err => {
+        console.error("Error fetching installed apps:", err);
+        setApplist([]);
+        setIsAppInstalled(false);
+      });
+    } else {
+      console.log("getInstalledRelatedApps is not supported");
+      setApplist([]);
+      setIsAppInstalled(false);
+    }
+  }, []);
 
-    // const amazonUri = 'nxtr://nux.new.user.joinus';
+  const handleButtonClick = () => {
+    const amazonUri = 'intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;';
+    const fallbackUrl = 'https://www.amazon.com/dp/B08J5F3G18';
 
-    const amazonUri='intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;'
-
-    // Define the fallback URL (e.g., a specific product page on Amazon)
-    const fallbackUrl = 'https://www.amazon.com/dp/B08J5F3G18'; // Replace with your product URL or relevant Amazon page
-
-    // Attempt to open the Amazon app using the URI scheme
-    // window.location.href = amazonUri;
-    window.location.replace(amazonUri);
-    clearHistory();
-    // Redirect to fallback URL after a short delay if the app is not installed
-    // setTimeout(() => {
-    //   alert('set timeout...')
-    //   window.location.href = fallbackUrl;
-    // }, 1000); // Adjust the timeout duration if necessary
+    if (isAppInstalled) {
+      // Open the app if it is installed
+      window.location.replace(amazonUri);
+      clearHistory();
+    } else {
+      // Redirect to fallback URL if the app is not installed
+      window.location.href = fallbackUrl;
+    }
   };
 
   function clearHistory() {
-    // Push an empty state to clear URL fragment
     window.history.pushState({}, '', '/');
-    // Push another state to ensure URL is reset
     window.history.pushState({}, '', '/');
-    // Remove the current state from history
     window.history.go(-1);
   }
 
   return (
     <div className="App">
-      <p>Market android check nxtr1223 added</p>
-=      <img
+      <p>Market android check nxtr added</p>
+      <p>Applist:</p>
+      {applist.length > 0 ? (
+        <ul>
+          {applist.map((app, index) => (
+            <li key={index}>
+              <strong>Platform:</strong> {app.platform} <br />
+              <strong>URL:</strong> {app.url} <br />
+              <strong>ID:</strong> {app.id}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No related apps are installed.</p>
+      )}
+      <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
-        alt=""
+        alt="App Logo"
       />
       <div className="button-container">
-        {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
-        <button className="btn2" onClick={handleOpen}>
-          Open the app
+        <button className="btn2" onClick={handleButtonClick}>
+          {isAppInstalled ? "Open the app" : "Install the app"}
         </button>
       </div>
     </div>
