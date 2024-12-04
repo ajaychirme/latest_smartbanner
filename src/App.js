@@ -82,7 +82,6 @@ if (isAndroid) {
       document.body.removeChild(iframe);
       setButtonText("Install");
       // App not installed
-      ("");
     }, 1500);
     iframe.onload = () => {
       clearTimeout(timeout);
