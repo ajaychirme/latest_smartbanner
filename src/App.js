@@ -103,7 +103,7 @@ if (isAndroid) {
 
   return (
     <div className="App">
-      <h1>{{ buttonText }}</h1>
+      
       <p>Market android check nxtr1223 added</p>={" "}
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
