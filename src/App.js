@@ -51,7 +51,7 @@ function App() {
     setTimeout(() => {
       if (!hasAppOpened) {
         console.log("App not installed, redirecting to Play Store...");
-        window.open(playStoreUrl, "_blank");
+        window.location.replace(playStoreUrl, "_blank");
       }
     }, timeout);
 
