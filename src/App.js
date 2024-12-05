@@ -1,10 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
   const [buttonText, setButtonText] = useState("");
-  const [flag, setFlag] = useState("Not yet");
+
   // const handleOpen = () => {
   //   // if (/android/i.test(navigator.userAgent)) {
   //   //   // Attempt to open the Amazon app
@@ -132,7 +131,7 @@ function App() {
     const appUrl = "nxtr://";
     const playStoreUrl =
       "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-    const timeout = 2000; // Time in milliseconds before redirecting
+    const timeout = 500; // Time in milliseconds before redirecting
     let hasAppOpened = false;
 
     // Try to open the app using the custom URL scheme
@@ -202,7 +201,7 @@ function App() {
 
   return (
     <div className="App">
-      <h3>{flag}</h3>
+      <h3>{buttonText}</h3>
       <p>Market android check nxtr1223 added</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
