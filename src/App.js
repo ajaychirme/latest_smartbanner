@@ -64,6 +64,14 @@ function App() {
     });
   };
 
+  const handleIntent = () =>{
+    console.log("Installed app");
+          window.open(
+            "https://play.google.com/store/apps/details?id=com.totum.student",
+            "_blank"
+          );
+  }
+
   // const handleOpen = () => {
   //   console.log("Clicked");
 
@@ -177,6 +185,9 @@ function App() {
         {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
         <button className="btn2" onClick={handleOpen}>
           {buttonText}
+        </button>
+        <button onClick={handleIntent}>
+          Intent URL
         </button>
       </div>
     </div>
