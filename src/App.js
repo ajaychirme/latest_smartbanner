@@ -46,7 +46,7 @@ function App() {
     let hasAppOpened = false;
 
     // Open the app using its custom URL scheme
-    window.location.href = appUrl;
+    window.location.href = "https://play.google.com/store/apps/details?id=com.totum.student";
 
     // Use a timeout to detect if the app was not installed
     setTimeout(() => {
