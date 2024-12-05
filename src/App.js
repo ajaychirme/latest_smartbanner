@@ -40,7 +40,7 @@ function App() {
   const handleOpen = () => {
     const appUrl = "nxtr://";
     const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-    const timeout = 2000; // Time in milliseconds before redirecting to Play Store
+    const timeout = 500; // Time in milliseconds before redirecting to Play Store
     let hasAppOpened = false;
 
     // Open the app using its custom URL scheme
@@ -100,32 +100,32 @@ function App() {
     // Remove the current state from history
     window.history.go(-1);
   }
-  const checkIfAppInstalled = () => {
-    console.log("checkIfAppInstalled");
-    // const env = process.env.ENV_NAME;
-    let testUrl = "";
-    testUrl = "nxtr://scan"; // Scheme for production
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = testUrl;
-    // const start = Date.now();
-    const timeout = setTimeout(() => {
-      document.body.removeChild(iframe);
-      setButtonText("Install");
-      // App not installed
-    }, 500);
-    iframe.onload = () => {
-      clearTimeout(timeout);
-      setButtonText("Open"); // App is installed
-      document.body.removeChild(iframe);
-    };
-    iframe.onerror = () => {
-      clearTimeout(timeout);
-      setButtonText("Install"); // App not installed
-      document.body.removeChild(iframe);
-    };
-    document.body.appendChild(iframe);
-  };
+  // const checkIfAppInstalled = () => {
+  //   console.log("checkIfAppInstalled");
+  //   // const env = process.env.ENV_NAME;
+  //   let testUrl = "";
+  //   testUrl = "nxtr://scan"; // Scheme for production
+  //   const iframe = document.createElement("iframe");
+  //   iframe.style.display = "none";
+  //   iframe.src = testUrl;
+  //   // const start = Date.now();
+  //   const timeout = setTimeout(() => {
+  //     document.body.removeChild(iframe);
+  //     setButtonText("Install");
+  //     // App not installed
+  //   }, 500);
+  //   iframe.onload = () => {
+  //     clearTimeout(timeout);
+  //     setButtonText("Open"); // App is installed
+  //     document.body.removeChild(iframe);
+  //   };
+  //   iframe.onerror = () => {
+  //     clearTimeout(timeout);
+  //     setButtonText("Install"); // App not installed
+  //     document.body.removeChild(iframe);
+  //   };
+  //   document.body.appendChild(iframe);
+  // };
 
   useEffect(() => {
     const appUrl = "nxtr://";
