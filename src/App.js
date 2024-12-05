@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect } from "react";
-import AppLink from "react-native-app-link";
+
 function App() {
   const [buttonText, setButtonText] = useState("Install");
   const [flag, setFlag] = useState("Not yet");
@@ -38,50 +38,62 @@ function App() {
   //   // }, 1000); // Adjust the timeout duration if necessary
   // };
 
-  AppLink.maybeOpenURL("nxtr://", {
-    appName: "Totum",
-    appStoreId: "", // iOS App Store ID (if needed, otherwise leave empty or remove)
-    playStoreId: "com.totum.student", // Google Play Store ID
-  })
-    .then(() => {
-      setFlag("Installed app");
-      console.log("App is installed!");
-    })
-    .catch(() => {
-      setFlag("Not Installed app");
-      console.log("App is not installed.");
-    });
-
   const handleOpen = () => {
-    console.log("Clicked");
+    const appUrl = "nxtr://";
+    const playStoreUrl =
+      "https://play.google.com/store/apps/details?id=com.totum.student";
+    const timeout = 2000; // Time in milliseconds before redirecting to Play Store
+    let hasAppOpened = false;
 
-    const ua = navigator.userAgent || navigator.vendor || "";
-    const isAndroid = /Android|webOS|BlackBerry|IEMobile|Mobile|CriOS/i.test(
-      ua
-    );
+    // Open the app using its custom URL scheme
+    window.location.href = appUrl;
 
-    console.log("IsAndroid =>", isAndroid);
-
-    if (isAndroid) {
-      // const env = process.env.ENV_NAME;
-      let appUrl = "";
-      appUrl =
-        "intent://scan/#Intent;scheme=nxtr;package=com.totum.student.dev;end;";
-
-      if (buttonText === "Install") {
-        console.log("Installed app");
-        window.open(
-          "https://play.google.com/store/apps/details?id=com.totum.student",
-          "_blank"
-        );
-      } else {
-        console.log("Opening app");
-        appUrl =
-          "intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;";
-        window.location.replace(appUrl);
+    // Use a timeout to detect if the app was not installed
+    setTimeout(() => {
+      if (!hasAppOpened) {
+        console.log("App not installed, redirecting to Play Store...");
+        window.open(playStoreUrl, "_blank");
       }
-    }
+    }, timeout);
+
+    // Add an event to confirm the user has the app installed (optional)
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        hasAppOpened = true;
+      }
+    });
   };
+
+  // const handleOpen = () => {
+  //   console.log("Clicked");
+
+  //   const ua = navigator.userAgent || navigator.vendor || "";
+  //   const isAndroid = /Android|webOS|BlackBerry|IEMobile|Mobile|CriOS/i.test(
+  //     ua
+  //   );
+
+  //   console.log("IsAndroid =>", isAndroid);
+
+  //   if (isAndroid) {
+  //     // const env = process.env.ENV_NAME;
+  //     let appUrl = "";
+  //     appUrl =
+  //       "intent://scan/#Intent;scheme=nxtr;package=com.totum.student.dev;end;";
+
+  //     if (buttonText === "Install") {
+  //       console.log("Installed app");
+  //       window.open(
+  //         "https://play.google.com/store/apps/details?id=com.totum.student",
+  //         "_blank"
+  //       );
+  //     } else {
+  //       console.log("Opening app");
+  //       appUrl =
+  //         "intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;";
+  //       window.location.replace(appUrl);
+  //     }
+  //   }
+  // };
   function clearHistory() {
     // Push an empty state to clear URL fragment
     window.history.pushState({}, "", "/");
