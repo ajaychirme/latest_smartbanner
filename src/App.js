@@ -3,7 +3,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [buttonText, setButtonText] = useState("Install");
+  const [buttonText, setButtonText] = useState("");
   const [flag, setFlag] = useState("Not yet");
   // const handleOpen = () => {
   //   // if (/android/i.test(navigator.userAgent)) {
@@ -115,7 +115,7 @@ function App() {
       document.body.removeChild(iframe);
       setButtonText("Install");
       // App not installed
-    }, 1500);
+    }, 500);
     iframe.onload = () => {
       clearTimeout(timeout);
       setButtonText("Open"); // App is installed
@@ -133,7 +133,7 @@ function App() {
     const appUrl = "nxtr://";
     const playStoreUrl =
       "https://play.google.com/store/apps/details?id=com.totum.student";
-    const timeout = 2000; // Time in milliseconds before fallback
+    const timeout = 500; // Time in milliseconds before fallback
     let hasAppOpened = false;
 
     // Attempt to open the app using the custom URL scheme
