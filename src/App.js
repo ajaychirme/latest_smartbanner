@@ -41,7 +41,7 @@ function App() {
   const handleOpen = () => {
     const appUrl = "nxtr://";
     const playStoreUrl =
-      "https://play.google.com/store/apps/details?id=com.totum.student";
+      "intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;";
     const timeout = 2000; // Time in milliseconds before redirecting to Play Store
     let hasAppOpened = false;
 
@@ -129,40 +129,40 @@ function App() {
     document.body.appendChild(iframe);
   };
 
-  useEffect(() => {
-    const appUrl = "nxtr://";
-    const playStoreUrl = "market://details?id=com.totum.student";
-    const timeout = 500; // Time in milliseconds before fallback
-    let hasAppOpened = false;
+  // useEffect(() => {
+  //   const appUrl = "nxtr://";
+  //   const playStoreUrl = "market://details?id=com.totum.student";
+  //   const timeout = 500; // Time in milliseconds before fallback
+  //   let hasAppOpened = false;
 
-    // Attempt to open the app using the custom URL scheme
-    window.location.href = appUrl;
+  //   // Attempt to open the app using the custom URL scheme
+  //   window.location.href = appUrl;
 
-    // Use a timeout to check if the app is installed
-    const timer = setTimeout(() => {
-      if (!hasAppOpened) {
-        console.log("App is not installed.");
-        setButtonText("Install");
-        window.location.href = playStoreUrl;
-      }
-    }, timeout);
+  //   // Use a timeout to check if the app is installed
+  //   const timer = setTimeout(() => {
+  //     if (!hasAppOpened) {
+  //       console.log("App is not installed.");
+  //       setButtonText("Install");
+  //       window.location.href = playStoreUrl;
+  //     }
+  //   }, timeout);
 
-    // Add an event listener to detect if the app is opened
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        hasAppOpened = true;
-        setButtonText("Open");
-      }
-    };
+  //   // Add an event listener to detect if the app is opened
+  //   const handleVisibilityChange = () => {
+  //     if (document.visibilityState === "hidden") {
+  //       hasAppOpened = true;
+  //       setButtonText("Open");
+  //     }
+  //   };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+  //   document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    // Cleanup
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
+  //   // Cleanup
+  //   return () => {
+  //     clearTimeout(timer);
+  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
+  //   };
+  // }, []);
 
   return (
     <div className="App">
