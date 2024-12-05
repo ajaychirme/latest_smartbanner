@@ -131,8 +131,7 @@ function App() {
 
   useEffect(() => {
     const appUrl = "nxtr://";
-    const playStoreUrl =
-      "https://play.google.com/store/apps/details?id=com.totum.student";
+    const playStoreUrl = "market://details?id=com.totum.student";
     const timeout = 500; // Time in milliseconds before fallback
     let hasAppOpened = false;
 
@@ -144,6 +143,7 @@ function App() {
       if (!hasAppOpened) {
         console.log("App is not installed.");
         setButtonText("Install");
+        window.location.href = playStoreUrl;
       }
     }, timeout);
 
@@ -163,7 +163,6 @@ function App() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
-  
 
   return (
     <div className="App">
