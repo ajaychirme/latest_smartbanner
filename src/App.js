@@ -46,16 +46,13 @@ function App() {
     let hasAppOpened = false;
 
     // Open the app using its custom URL scheme
-    window.location.href = "https://play.google.com/store/apps/details?id=com.totum.student";
+    window.location.href = appUrl;
 
     // Use a timeout to detect if the app was not installed
     setTimeout(() => {
       if (!hasAppOpened) {
         console.log("App not installed, redirecting to Play Store...");
-        window.open(
-          "https://play.google.com/store/apps/details?id=com.totum.student",
-          "_blank"
-        );
+        window.open(playStoreUrl, "_blank");
       }
     }, timeout);
 
@@ -65,14 +62,6 @@ function App() {
         hasAppOpened = true;
       }
     });
-  };
-
-  const handleIntent = () => {
-    console.log("Installed app");
-    window.open(
-      "https://play.google.com/store/apps/details?id=com.totum.student",
-      "_blank"
-    );
   };
 
   // const handleOpen = () => {
@@ -174,6 +163,7 @@ function App() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
+  
 
   return (
     <div className="App">
@@ -188,7 +178,6 @@ function App() {
         <button className="btn2" onClick={handleOpen}>
           {buttonText}
         </button>
-        <button onClick={handleIntent}>Intent URL</button>
       </div>
     </div>
   );
