@@ -1,9 +1,10 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect } from "react";
-
+import AppLink from "react-native-app-link";
 function App() {
   const [buttonText, setButtonText] = useState("Install");
+  const [flag, setFlag] = useState("Not yet");
   // const handleOpen = () => {
   //   // if (/android/i.test(navigator.userAgent)) {
   //   //   // Attempt to open the Amazon app
@@ -37,30 +38,50 @@ function App() {
   //   // }, 1000); // Adjust the timeout duration if necessary
   // };
 
-  const handleOpen = () =>{
-    console.log('Clicked');
+  AppLink.maybeOpenURL("nxtr://", {
+    appName: "Totum",
+    appStoreId: "", // iOS App Store ID (if needed, otherwise leave empty or remove)
+    playStoreId: "com.totum.student", // Google Play Store ID
+  })
+    .then(() => {
+      setFlag("Installed app");
+      console.log("App is installed!");
+    })
+    .catch(() => {
+      setFlag("Not Installed app");
+      console.log("App is not installed.");
+    });
 
-const ua = navigator.userAgent || navigator.vendor || '';
-const isAndroid = /Android|webOS|BlackBerry|IEMobile|Mobile|CriOS/i.test(ua);
+  const handleOpen = () => {
+    console.log("Clicked");
 
-console.log('IsAndroid =>', isAndroid);
+    const ua = navigator.userAgent || navigator.vendor || "";
+    const isAndroid = /Android|webOS|BlackBerry|IEMobile|Mobile|CriOS/i.test(
+      ua
+    );
 
-if (isAndroid) {
-    // const env = process.env.ENV_NAME;
-    let appUrl = '';
-    appUrl = 'intent://scan/#Intent;scheme=nxtr;package=com.totum.student.dev;end;';
+    console.log("IsAndroid =>", isAndroid);
 
-    if (buttonText === 'Install') {
-        console.log('Installed app');
-        window.open('https://play.google.com/store/apps/details?id=com.totum.student', '_blank');
-    } else {
-        console.log('Opening app');
-        appUrl = 'intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;';
+    if (isAndroid) {
+      // const env = process.env.ENV_NAME;
+      let appUrl = "";
+      appUrl =
+        "intent://scan/#Intent;scheme=nxtr;package=com.totum.student.dev;end;";
+
+      if (buttonText === "Install") {
+        console.log("Installed app");
+        window.open(
+          "https://play.google.com/store/apps/details?id=com.totum.student",
+          "_blank"
+        );
+      } else {
+        console.log("Opening app");
+        appUrl =
+          "intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;";
         window.location.replace(appUrl);
+      }
     }
-}
-
-  }
+  };
   function clearHistory() {
     // Push an empty state to clear URL fragment
     window.history.pushState({}, "", "/");
@@ -102,8 +123,8 @@ if (isAndroid) {
 
   return (
     <div className="App">
-      
-      <p>Market android check nxtr1223 added</p>={" "}
+      <h3>{flag}</h3>
+      <p>Market android check nxtr1223 added</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
         alt=""
