@@ -147,9 +147,9 @@ function App() {
       const timer = setTimeout(() => {
         // If focus didn't change, assume the app isn't installed
         if (!hasFocusChanged) {
-          setButtonLabel("Install");
+          setButtonText("Install");
         } else {
-          setButtonLabel("Open");
+          setButtonText("Open");
         }
 
         // Cleanup
