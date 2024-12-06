@@ -133,23 +133,23 @@ function App() {
 
   useEffect(() => {
     const checkAmazonApp = async () => {
-      try {
-        const amazonURL = "nxtr://";
-        const result = await new Promise((resolve) => {
-          const timeout = setTimeout(() => resolve(false), 500); // Fallback after 500ms
-          const testLink = document.createElement("a");
-          testLink.href = amazonURL;
-          testLink.target = "_blank";
-          testLink.click();
-          resolve(true);
-          clearTimeout(timeout);
-        });
-        if (result) {
-          setButtonText("Open");
-        }
-      } catch (error) {
+      const amazonURL = "nxtr://";
+      const hiddenAnchor = document.createElement("a");
+      hiddenAnchor.href = amazonURL;
+
+      // Temporarily attach to the DOM to test
+      hiddenAnchor.style.display = "none";
+      document.body.appendChild(hiddenAnchor);
+
+      // Check if the href changes (only works in supported environments)
+      if (hiddenAnchor.protocol === "nxtr:") {
+        setButtonText("Open");
+      } else {
         setButtonText("Install");
       }
+      // Cleanup
+      document.body.removeChild(hiddenAnchor);
+
     };
 
     checkAmazonApp();
