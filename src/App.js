@@ -132,24 +132,25 @@ function App() {
   // }, []);
 
   useEffect(() => {
-    const checkAmazonApp = async () => {
+    const checkAmazonApp = () => {
       const amazonURL = "nxtr://";
-      const hiddenAnchor = document.createElement("a");
-      hiddenAnchor.href = amazonURL;
+      const start = Date.now();
 
-      // Temporarily attach to the DOM to test
-      hiddenAnchor.style.display = "none";
-      document.body.appendChild(hiddenAnchor);
+      const timeout = setTimeout(() => {
+        // Assume app isn't installed if timeout occurs
+        if (Date.now() - start < 500) {
+          setButtonText("Install");
+        }
+      }, 300);
 
-      // Check if the href changes (only works in supported environments)
-      if (hiddenAnchor.protocol === "nxtr:") {
+      // Try opening the app silently
+      window.location.href = amazonURL;
+
+      // Catch cases where the app opens (and navigation succeeds)
+      window.addEventListener("blur", () => {
+        clearTimeout(timeout);
         setButtonText("Open");
-      } else {
-        setButtonText("Install");
-      }
-      // Cleanup
-      document.body.removeChild(hiddenAnchor);
-
+      });
     };
 
     checkAmazonApp();
