@@ -5,7 +5,7 @@ function App() {
   const [buttonText, setButtonText] = useState("");
 
   const handleOpen = () => {
-    const appUrl = "nxtr://";
+    const appUrl = "nxtr://nux.user.search";
     const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
     const timeout = 500; // Time in milliseconds before redirecting to Play Store
     let hasAppOpened = false;
