@@ -4,39 +4,6 @@ import { useState, useEffect } from "react";
 function App() {
   const [buttonText, setButtonText] = useState("");
 
-  // const handleOpen = () => {
-  //   // if (/android/i.test(navigator.userAgent)) {
-  //   //   // Attempt to open the Amazon app
-  //   //   window.location.href = "intent://com.amazon.mShop.android.shopping/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
-
-  //   //   // Fallback to Play Store if the app isn't opened
-  //   //   setTimeout(() => {
-  //   //     window.location.href = "market://details?id=com.amazon.mShop.android.shopping";
-  //   //   }, 2000); // Delay before fallback
-  //   // } else {
-  //   //   // Redirect to Amazon India website for non-Android users
-  //   //   window.location.href = "https://www.amazon.in";
-  //   // }
-
-  //   // const amazonUri = 'nxtr://nux.new.user.joinus';
-
-  //   const amazonUri =
-  //     "intent://scan/#Intent;scheme=nxtr;package=com.totum.student;end;";
-
-  //   // Define the fallback URL (e.g., a specific product page on Amazon)
-  //   const fallbackUrl = "https://www.amazon.com/dp/B08J5F3G18"; // Replace with your product URL or relevant Amazon page
-
-  //   // Attempt to open the Amazon app using the URI scheme
-  //   // window.location.href = amazonUri;
-  //   window.location.replace(amazonUri);
-  //   clearHistory();
-  //   // Redirect to fallback URL after a short delay if the app is not installed
-  //   // setTimeout(() => {
-  //   //   alert('set timeout...')
-  //   //   window.location.href = fallbackUrl;
-  //   // }, 1000); // Adjust the timeout duration if necessary
-  // };
-
   const handleOpen = () => {
     const appUrl = "nxtr://";
     const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
@@ -141,7 +108,7 @@ function App() {
     const timer = setTimeout(() => {
       if (!hasAppOpened) {
         console.log("App not installed, setting buttonText to Install");
-        setButtonText("Install"); // Set button text to "Install" if app is not installed
+        setButtonText("Open"); // Set button text to "Install" if app is not installed
         // window.location.href = playStoreUrl; // Redirect to Play Store
       }
     }, timeout);
@@ -151,7 +118,7 @@ function App() {
       if (document.visibilityState === "hidden") {
         hasAppOpened = true;
         console.log("App opened, setting buttonText to Open");
-        setButtonText("Open"); // Set button text to "Open" if app is installed
+        setButtonText("Install"); // Set button text to "Open" if app is installed
       }
     };
 
