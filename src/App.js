@@ -161,7 +161,7 @@ function App() {
         window.location.href = appURL;
       };
 
-      tryOpenApp();
+      // tryOpenApp();
 
       return () => {
         clearTimeout(timer);
