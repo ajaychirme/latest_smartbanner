@@ -94,41 +94,65 @@ function App() {
   //   document.body.appendChild(iframe);
   // };
 
+  // useEffect(() => {
+  //   const appUrl = "nxtr://";
+  //   const playStoreUrl =
+  //     "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
+  //   const timeout = 500; // Time in milliseconds before redirecting
+  //   let hasAppOpened = false;
+
+  //   // Try to open the app using the custom URL scheme
+  //   // window.location.href = appUrl;
+
+  //   // Use a timeout to detect if the app was not installed
+  //   const timer = setTimeout(() => {
+  //     if (!hasAppOpened) {
+  //       console.log("App not installed, setting buttonText to Install");
+  //       setButtonText("Open"); // Set button text to "Install" if app is not installed
+  //       // window.location.href = playStoreUrl; // Redirect to Play Store
+  //     }
+  //   }, timeout);
+
+  //   // Add an event listener to detect if the app is opened
+  //   const handleVisibilityChange = () => {
+  //     if (document.visibilityState === "hidden") {
+  //       hasAppOpened = true;
+  //       console.log("App opened, setting buttonText to Open");
+  //       setButtonText("Install"); // Set button text to "Open" if app is installed
+  //     }
+  //   };
+
+  //   document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  //   // Cleanup function to clear the timer and event listener
+  //   return () => {
+  //     clearTimeout(timer);
+  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
+  //   };
+  // }, []);
+
   useEffect(() => {
-    const appUrl = "nxtr://";
-    const playStoreUrl =
-      "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-    const timeout = 500; // Time in milliseconds before redirecting
-    let hasAppOpened = false;
-
-    // Try to open the app using the custom URL scheme
-    // window.location.href = appUrl;
-
-    // Use a timeout to detect if the app was not installed
-    const timer = setTimeout(() => {
-      if (!hasAppOpened) {
-        console.log("App not installed, setting buttonText to Install");
-        setButtonText("Open"); // Set button text to "Install" if app is not installed
-        // window.location.href = playStoreUrl; // Redirect to Play Store
-      }
-    }, timeout);
-
-    // Add an event listener to detect if the app is opened
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        hasAppOpened = true;
-        console.log("App opened, setting buttonText to Open");
-        setButtonText("Install"); // Set button text to "Open" if app is installed
+    const checkAmazonApp = async () => {
+      try {
+        const amazonURL = "nxtr://";
+        const result = await new Promise((resolve) => {
+          const timeout = setTimeout(() => resolve(false), 500); // Fallback after 500ms
+          const testLink = document.createElement("a");
+          testLink.href = amazonURL;
+          testLink.target = "_blank";
+          testLink.click();
+          resolve(true);
+          clearTimeout(timeout);
+        });
+        if (result) {
+          setButtonText("Open");
+        }
+      } catch (error) {
+        setButtonText("Install");
       }
     };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    // Cleanup function to clear the timer and event listener
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
+    checkAmazonApp();
   }, []);
 
   // useEffect(() => {
