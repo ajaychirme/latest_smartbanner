@@ -144,7 +144,7 @@ function App() {
       }, 300);
 
       // Try opening the app silently
-      window.location.href = amazonURL;
+      // window.location.href = amazonURL;
 
       // Catch cases where the app opens (and navigation succeeds)
       window.addEventListener("blur", () => {
