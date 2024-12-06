@@ -146,10 +146,10 @@ function App() {
       setTimeout(() => {
         if (!hasAppOpened) {
           console.log("App not installed, redirecting to Play Store...");
-          setButtonText("Open1")
+          setButtonText("Install1")
           // window.location.replace(playStoreUrl, "_blank");
         }else{
-          setButtonText("Install")
+          setButtonText("Open1")
         }
       }, timeout);
   
