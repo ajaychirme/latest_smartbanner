@@ -133,9 +133,9 @@ function App() {
 
   useEffect(() => {
     const checkAmazonApp = () => {
-      const appUrl = "nxtr://nux.user.search";
-      const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-      const timeout = 500; // Time in milliseconds before redirecting to Play Store
+      // const appUrl = "nxtr://nux.user.search";
+      // const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
+      const timeout = 100; // Time in milliseconds before redirecting to Play Store
       let hasAppOpened = false;
   
       // Open the app using its custom URL scheme
@@ -146,8 +146,10 @@ function App() {
       setTimeout(() => {
         if (!hasAppOpened) {
           console.log("App not installed, redirecting to Play Store...");
-          setButtonText("Install")
+          setButtonText("Open")
           // window.location.replace(playStoreUrl, "_blank");
+        }else{
+          setButtonText("Install")
         }
       }, timeout);
   
