@@ -134,23 +134,20 @@ function App() {
   useEffect(() => {
     const checkAmazonApp = () => {
       const amazonURL = "nxtr://";
+      let isAppInstalled = false;
+
+      // Try to open the app silently
       const start = Date.now();
+      const hiddenWindow = window.open(amazonURL, "_self");
 
-      const timeout = setTimeout(() => {
-        // Assume app isn't installed if timeout occurs
-        if (Date.now() - start < 500) {
-          setButtonText("Install");
+      // Check if the app was opened
+      const checkTimeout = setTimeout(() => {
+        if (Date.now() - start < 1500) {
+          isAppInstalled = true;
         }
-      }, 300);
-
-      // Try opening the app silently
-      // window.location.href = amazonURL;
-
-      // Catch cases where the app opens (and navigation succeeds)
-      window.addEventListener("blur", () => {
-        clearTimeout(timeout);
-        setButtonText("Open");
-      });
+        setButtonText(isAppInstalled ? "Open" : "Install");
+        if (hiddenWindow) hiddenWindow.close();
+      }, 1000);
     };
 
     checkAmazonApp();
