@@ -133,40 +133,30 @@ function App() {
 
   useEffect(() => {
     const checkAmazonApp = () => {
-      const appURL = "nxtr://";
-      let hasFocusChanged = false;
-
-      const onBlur = () => {
-        hasFocusChanged = true;
-      };
-
-      // Listen for focus change
-      window.addEventListener("blur", onBlur);
-
-      // Attempt to open the app
-      const timer = setTimeout(() => {
-        // If focus didn't change, assume the app isn't installed
-        if (!hasFocusChanged) {
-          setButtonText("Install");
-        } else {
-          setButtonText("Open");
+      const appUrl = "nxtr://nux.user.search";
+      const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
+      const timeout = 500; // Time in milliseconds before redirecting to Play Store
+      let hasAppOpened = false;
+  
+      // Open the app using its custom URL scheme
+      // window.location.href = appUrl;
+      setButtonText("Open")
+  
+      // Use a timeout to detect if the app was not installed
+      setTimeout(() => {
+        if (!hasAppOpened) {
+          console.log("App not installed, redirecting to Play Store...");
+          setButtonText("Install")
+          // window.location.replace(playStoreUrl, "_blank");
         }
-
-        // Cleanup
-        window.removeEventListener("blur", onBlur);
-      }, 1000);
-
-      // Try opening the app
-      const tryOpenApp = () => {
-        window.location.href = appURL;
-      };
-
-      // tryOpenApp();
-
-      return () => {
-        clearTimeout(timer);
-        window.removeEventListener("blur", onBlur);
-      };
+      }, timeout);
+  
+      // Add an event to confirm the user has the app installed (optional)
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          hasAppOpened = true;
+        }
+      });
     };
 
 
