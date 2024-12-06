@@ -133,22 +133,42 @@ function App() {
 
   useEffect(() => {
     const checkAmazonApp = () => {
-      const amazonURL = "nxtr://";
-      let isAppInstalled = false;
+      const appURL = "nxtr://";
+      let hasFocusChanged = false;
 
-      // Try to open the app silently
-      const start = Date.now();
-      const hiddenWindow = window.open(amazonURL, "_self");
+      const onBlur = () => {
+        hasFocusChanged = true;
+      };
 
-      // Check if the app was opened
-      const checkTimeout = setTimeout(() => {
-        if (Date.now() - start < 1500) {
-          isAppInstalled = true;
+      // Listen for focus change
+      window.addEventListener("blur", onBlur);
+
+      // Attempt to open the app
+      const timer = setTimeout(() => {
+        // If focus didn't change, assume the app isn't installed
+        if (!hasFocusChanged) {
+          setButtonLabel("Install");
+        } else {
+          setButtonLabel("Open");
         }
-        setButtonText(isAppInstalled ? "Open" : "Install");
-        if (hiddenWindow) hiddenWindow.close();
+
+        // Cleanup
+        window.removeEventListener("blur", onBlur);
       }, 1000);
+
+      // Try opening the app
+      const tryOpenApp = () => {
+        window.location.href = appURL;
+      };
+
+      tryOpenApp();
+
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("blur", onBlur);
+      };
     };
+
 
     checkAmazonApp();
   }, []);
