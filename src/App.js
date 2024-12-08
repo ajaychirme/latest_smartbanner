@@ -7,26 +7,29 @@ function App() {
   const handleOpen = () => {
     const appUrl = "nxtr://nux.user.search";
     const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-    const timeout = 500; // Time in milliseconds before redirecting to Play Store
+    // const timeout = 500; // Time in milliseconds before redirecting to Play Store
     let hasAppOpened = false;
 
     // Open the app using its custom URL scheme
     window.location.href = appUrl;
-
+    if (!hasAppOpened) {
+      console.log("App not installed, redirecting to Play Store...");
+      window.location.replace(playStoreUrl, "_blank");
+    }
     // Use a timeout to detect if the app was not installed
-    setTimeout(() => {
-      if (!hasAppOpened) {
-        console.log("App not installed, redirecting to Play Store...");
-        window.location.replace(playStoreUrl, "_blank");
-      }
-    }, timeout);
+    // setTimeout(() => {
+    //   if (!hasAppOpened) {
+    //     console.log("App not installed, redirecting to Play Store...");
+    //     window.location.replace(playStoreUrl, "_blank");
+    //   }
+    // }, timeout);
 
     // Add an event to confirm the user has the app installed (optional)
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "hidden") {
-        hasAppOpened = true;
-      }
-    });
+    // document.addEventListener("visibilitychange", () => {
+    //   if (document.visibilityState === "hidden") {
+    //     hasAppOpened = true;
+    //   }
+    // });
   };
 
   // const handleOpen = () => {
@@ -59,14 +62,7 @@ function App() {
   //     }
   //   }
   // };
-  function clearHistory() {
-    // Push an empty state to clear URL fragment
-    window.history.pushState({}, "", "/");
-    // Push another state to ensure URL is reset
-    window.history.pushState({}, "", "/");
-    // Remove the current state from history
-    window.history.go(-1);
-  }
+  
   // const checkIfAppInstalled = () => {
   //   console.log("checkIfAppInstalled");
   //   // const env = process.env.ENV_NAME;
@@ -94,76 +90,7 @@ function App() {
   //   document.body.appendChild(iframe);
   // };
 
-  // useEffect(() => {
-  //   const appUrl = "nxtr://";
-  //   const playStoreUrl =
-  //     "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-  //   const timeout = 500; // Time in milliseconds before redirecting
-  //   let hasAppOpened = false;
 
-  //   // Try to open the app using the custom URL scheme
-  //   // window.location.href = appUrl;
-
-  //   // Use a timeout to detect if the app was not installed
-  //   const timer = setTimeout(() => {
-  //     if (!hasAppOpened) {
-  //       console.log("App not installed, setting buttonText to Install");
-  //       setButtonText("Open"); // Set button text to "Install" if app is not installed
-  //       // window.location.href = playStoreUrl; // Redirect to Play Store
-  //     }
-  //   }, timeout);
-
-  //   // Add an event listener to detect if the app is opened
-  //   const handleVisibilityChange = () => {
-  //     if (document.visibilityState === "hidden") {
-  //       hasAppOpened = true;
-  //       console.log("App opened, setting buttonText to Open");
-  //       setButtonText("Install"); // Set button text to "Open" if app is installed
-  //     }
-  //   };
-
-  //   document.addEventListener("visibilitychange", handleVisibilityChange);
-
-  //   // Cleanup function to clear the timer and event listener
-  //   return () => {
-  //     clearTimeout(timer);
-  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
-  //   };
-  // }, []);
-
-  useEffect(() => {
-    const checkAmazonApp = () => {
-      // const appUrl = "nxtr://nux.user.search";
-      // const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-      const timeout = 500; // Time in milliseconds before redirecting to Play Store
-      let hasAppOpened = false;
-  
-      // Open the app using its custom URL scheme
-      // window.location.href = appUrl;
-      setButtonText("Open")
-  
-      // Use a timeout to detect if the app was not installed
-      setTimeout(() => {
-        if (!hasAppOpened) {
-          console.log("App not installed, redirecting to Play Store...");
-          setButtonText("Install1")
-          // window.location.replace(playStoreUrl, "_blank");
-        }else{
-          setButtonText("Open1")
-        }
-      }, timeout);
-  
-      // Add an event to confirm the user has the app installed (optional)
-      document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "hidden") {
-          hasAppOpened = true;
-        }
-      });
-    };
-
-
-    checkAmazonApp();
-  }, []);
 
   // useEffect(() => {
   //   const appUrl = "nxtr://";
