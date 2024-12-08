@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Plugins } from '@capacitor/core';
 import { App } from '@capacitor/app';
 
-const app = () => {
+const App = () => {
   const [isInstalled, setIsInstalled] = useState(null); // `null` for initial loading state
 
   useEffect(() => {
@@ -35,4 +35,4 @@ const app = () => {
   );
 };
 
-export default app;
+export default App;
