@@ -4,17 +4,23 @@ const AppCheck = () => {
   const [isAppInstalled, setIsAppInstalled] = useState(false);
 
   useEffect(() => {
-    if ('getInstalledRelatedApps' in navigator) {
-      navigator.getInstalledRelatedApps().then((relatedApps) => {
-        const appInstalled = relatedApps.some(
-          (app) => app.id === "com.totum.student"
-        );
-        setIsAppInstalled(appInstalled);
-      }).catch((error) => {
-        console.error("Error checking related apps:", error);
-      });
+    if ("getInstalledRelatedApps" in navigator) {
+      navigator
+        .getInstalledRelatedApps()
+        .then((relatedApps) => {
+          const appInstalled = relatedApps.some(
+            (app) => app.id === "com.totum.student"
+          );
+          setIsAppInstalled(appInstalled);
+        })
+        .catch((error) => {
+          console.log("Hiii");
+          console.error("Error checking related apps:", error);
+        });
     } else {
-      console.warn("getInstalledRelatedApps API is not supported on this browser.");
+      console.warn(
+        "getInstalledRelatedApps API is not supported on this browser."
+      );
     }
   }, []);
 
