@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 
 const AppCheck = () => {
   const [isAppInstalled, setIsAppInstalled] = useState(false);
-  const [result, setResult] = useState([]);
-  const [error, setError] = useState();
+  const [relatedApps, setRelatedApps] = useState([]);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     if ("getInstalledRelatedApps" in navigator) {
       navigator
         .getInstalledRelatedApps()
         .then((relatedApps) => {
-          setResult(relatedApps)
+          setRelatedApps(relatedApps);
           const appInstalled = relatedApps.some(
             (app) => app.id === "com.totum.student"
           );
           setIsAppInstalled(appInstalled);
         })
-        .catch((error) => {
-          setError(error)
-          console.log("Hiii");
-          console.error("Error checking related apps:", error);
+        .catch((err) => {
+          setError(err.message);
+          console.error("Error checking related apps:", err);
         });
     } else {
       console.warn(
@@ -30,13 +30,27 @@ const AppCheck = () => {
   return (
     <div>
       <h1>Check if App is Installed</h1>
-      {result?(<h3>{result}</h3>):<h3>No result</h3>}
-      {error?(<h3>{error}</h3>):<h3>No result</h3>}
-      {isAppInstalled ? (
-        <p>The Totum native app is installed!</p>
+      {relatedApps.length > 0 ? (
+        <div>
+          <h3>Related Apps Found:</h3>
+          <ul>
+            {relatedApps.map((app, index) => (
+              <li key={index}>
+                <strong>Name:</strong> {app.platform} | <strong>ID:</strong>{" "}
+                {app.id}
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : (
-        <p>The Totum native app is not installed.</p>
+        <h3>No related apps found</h3>
       )}
+      {error && <h3 style={{ color: "red" }}>Error: {error}</h3>}
+      <p>
+        {isAppInstalled
+          ? "The Totum native app is installed!"
+          : "The Totum native app is not installed."}
+      </p>
     </div>
   );
 };
