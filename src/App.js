@@ -1,9 +1,10 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   const [hasAppOpened, setHasAppOpened] = useState(false);
-  const [buttonText, setButtonText] = useState("");
+  const [buttonText, setButtonText] = useState("Install");
+  const clickDone = useRef<HTMLButtonElement>(null);
 
   const handleOpen = () => {
     const currentUrl = 'https://develop.totum.com/discount/ambassador-snooker-and-pool-clubs/get_offer_totum_app';
@@ -35,46 +36,39 @@ function App() {
     });    
   };
 
+  const setButtonTextOnMount = () =>{
+    const currentUrl = 'https://develop.totum.com/discount/ambassador-snooker-and-pool-clubs/get_offer_totum_app';
+
+    const appUrl = currentUrl.includes('/discount/')
+      ? 'nxtr://'
+      : 'nxtr://';
+    
+    const playStoreUrl = 'intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;';
+    const timeout = 500; // Time in milliseconds before redirecting to Play Store
+    let hasAppOpened = false;
+    
+    // Open the app using its custom URL scheme
+    // window.location.href = appUrl;
+    setButtonText("Open")
+    // Use a timeout to detect if the app was not installed
+    setTimeout(() => {
+      if (!hasAppOpened) {
+        console.log('App not installed, redirecting to Play Store...');
+        setButtonText("Install")
+        // window.location.replace(playStoreUrl);
+      }
+    }, timeout);
+  }
+
   useEffect(() => {
-    const checkAmazonApp = () => {
-      const timeout = 500; // Time in milliseconds before redirecting to Play Store
-
-      // Open the app using its custom URL scheme
-      setButtonText("Open");
-
-      // Use a timeout to detect if the app was not installed
-      setTimeout(() => {
-        if (!hasAppOpened) {
-          console.log("App not installed, redirecting to Play Store...");
-          setButtonText("Install");
-          // window.location.replace(playStoreUrl, "_blank");
-        } else {
-          setButtonText("Open1");
-        }
-      }, timeout);
-
-      // Add an event to confirm the user has the app installed (optional)
-      const handleVisibilityChange = () => {
-        if (document.visibilityState === "hidden") {
-          setHasAppOpened(true);
-        }
-      };
-
-      document.addEventListener("visibilitychange", handleVisibilityChange);
-
-      return () => {
-        document.removeEventListener(
-          "visibilitychange",
-          handleVisibilityChange
-        );
-      };
-    };
-
-    checkAmazonApp();
+    if(clickDone.currentUrl){
+      clickDone.current.click();
+    }
   }, [hasAppOpened]);
   return (
     <div className="App">
       <h3>{buttonText}</h3>
+      <button style={{display:'none'}} ref={clickDone} onClick={setButtonTextOnMount}>Okay</button>
       <p>Market android check nxtr1223 added</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
