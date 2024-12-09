@@ -6,7 +6,9 @@ function App() {
 
   const handleOpen = () => {
     // const appUrl = "https://nxtr://nux.user.search";
-    const appUrl = 'https://stg.totum.com/discount';
+    //https://totum.com/discount
+    const packageName = 'com.totum.student.dev'
+    const appUrl = `intent://#Intent;package=${packageName};scheme=totum;end;`;
     const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
     const timeout = 500; // Time in milliseconds before redirecting to Play Store
     let hasAppOpened = false;
