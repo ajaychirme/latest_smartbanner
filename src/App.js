@@ -8,31 +8,31 @@ function App() {
 
   const handleOpen = () => {
     const packageName = "com.totum.student";
-    const appUrl = `intent://#Intent;package=${packageName};end;`;
+    const appIntentUrl = `intent://#Intent;package=${packageName};action=android.intent.action.VIEW;end;`;
+    const playStoreUrl = `https://play.google.com/store/apps/details?id=${packageName}`;
+    const timeout = 500; // Timeout in milliseconds to detect if the app was opened
   
-    const playStoreUrl =
-      "https://play.google.com/store/apps/details?id=com.totum.student";
-    const timeout = 500; // Time in milliseconds before redirecting to Play Store
     let isAppOpened = false;
   
-    // Try to open the app
-    window.location.href = appUrl;
+    // Attempt to open the app
+    window.location.href = appIntentUrl;
   
-    // Redirect to Play Store if the app is not installed
+    // Use a timeout to fallback to Play Store if the app is not opened
     setTimeout(() => {
       if (!isAppOpened) {
-        console.log("App not installed, redirecting to Play Store...");
+        console.log("App not installed or not opened, redirecting to Play Store...");
         window.location.replace(playStoreUrl);
       }
     }, timeout);
   
-    // Check visibility state to determine if the app was opened
+    // Listen for visibility changes to detect if the app was opened
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") {
         isAppOpened = true;
       }
     });
   };
+  
   
 
   useEffect(() => {
