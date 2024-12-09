@@ -1,58 +1,88 @@
-import React, { useEffect, useState } from "react";
+import "./App.css";
+import { useState, useEffect } from "react";
 
-const AppCheck = () => {
-  const [isAppInstalled, setIsAppInstalled] = useState(false);
-  const [relatedApps, setRelatedApps] = useState([]);
-  const [error, setError] = useState(null);
+function App() {
+  const [hasAppOpened, setHasAppOpened] = useState(false);
+  const [buttonText, setButtonText] = useState("");
+
+  const handleOpen = () => {
+    const appUrl = "nxtr://nux.user.search";
+    const playStoreUrl =
+      "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
+    const timeout = 500; // Time in milliseconds before redirecting to Play Store
+
+    // Open the app using its custom URL scheme
+    window.location.href = appUrl;
+
+    // Use a timeout to detect if the app was not installed
+    setTimeout(() => {
+      if (!hasAppOpened) {
+        console.log("App not installed, redirecting to Play Store...");
+        window.location.replace(playStoreUrl, "_blank");
+      }
+    }, timeout);
+
+    // Add an event to confirm the user has the app installed (optional)
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        setHasAppOpened(true);
+      }
+    });
+  };
 
   useEffect(() => {
-    if ("getInstalledRelatedApps" in navigator) {
-      navigator
-        .getInstalledRelatedApps()
-        .then((relatedApps) => {
-          setRelatedApps(relatedApps);
-          const appInstalled = relatedApps.some(
-            (app) => app.id === "com.totum.student"
-          );
-          setIsAppInstalled(appInstalled);
-        })
-        .catch((err) => {
-          setError(err.message);
-          console.error("Error checking related apps:", err);
-        });
-    } else {
-      console.warn(
-        "getInstalledRelatedApps API is not supported on this browser."
-      );
-    }
-  }, []);
+    const checkAmazonApp = () => {
+      const timeout = 500; // Time in milliseconds before redirecting to Play Store
 
+      // Open the app using its custom URL scheme
+      setButtonText("Open");
+
+      // Use a timeout to detect if the app was not installed
+      setTimeout(() => {
+        if (!hasAppOpened) {
+          console.log("App not installed, redirecting to Play Store...");
+          setButtonText("Install");
+          // window.location.replace(playStoreUrl, "_blank");
+        } else {
+          setButtonText("Open1");
+        }
+      }, timeout);
+
+      // Add an event to confirm the user has the app installed (optional)
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === "hidden") {
+          setHasAppOpened(true);
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
+      return () => {
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibilityChange
+        );
+      };
+    };
+
+    checkAmazonApp();
+  }, [hasAppOpened]);
   return (
-    <div>
-      <h1>Check if App is Installed</h1>
-      {relatedApps.length > 0 ? (
-        <div>
-          <h3>Related Apps Found:</h3>
-          <ul>
-            {relatedApps.map((app, index) => (
-              <li key={index}>
-                <strong>Name:</strong> {app.platform} | <strong>ID:</strong>{" "}
-                {app.id}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <h3>No related apps found</h3>
-      )}
-      {error && <h3 style={{ color: "red" }}>Error: {error}</h3>}
-      <p>
-        {isAppInstalled
-          ? "The Totum native app is installed!"
-          : "The Totum native app is not installed."}
-      </p>
+    <div className="App">
+      <h3>{buttonText}</h3>
+      <p>Market android check nxtr1223 added</p>
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
+        alt=""
+      />
+      <div className="button-container">
+        {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
+        <button className="btn2" onClick={handleOpen}>
+          {buttonText}
+        </button>
+      </div>
     </div>
   );
-};
+}
 
-export default AppCheck;
+export default App;
