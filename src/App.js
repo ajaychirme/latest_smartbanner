@@ -1,81 +1,85 @@
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 
-function App() {
+export default function AppCheck() {
   const [hasAppOpened, setHasAppOpened] = useState(false);
   const [buttonText, setButtonText] = useState("Install");
-  const clickDone = useRef<HTMLButtonElement>(null);
+  const clickDoneRef = useRef(null);
 
   const handleOpen = () => {
-    const currentUrl = 'https://develop.totum.com/discount/ambassador-snooker-and-pool-clubs/get_offer_totum_app';
+    const currentUrl =
+      "https://develop.totum.com/discount/ambassador-snooker-and-pool-clubs/get_offer_totum_app";
 
-    const appUrl = currentUrl.includes('/discount/')
+    const appUrl = currentUrl.includes("/discount/")
       ? currentUrl
-      : 'nxtr://nux.user.search';
-    
-    const playStoreUrl = 'intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;';
+      : "nxtr://nux.user.search";
+
+    const playStoreUrl =
+      "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
     const timeout = 500; // Time in milliseconds before redirecting to Play Store
-    let hasAppOpened = false;
-    
+    let isAppOpened = false;
+
     // Open the app using its custom URL scheme
     window.location.href = appUrl;
-    
-    // Use a timeout to detect if the app was not installed
+
+    // Detect if the app is not installed
     setTimeout(() => {
-      if (!hasAppOpened) {
-        console.log('App not installed, redirecting to Play Store...');
+      if (!isAppOpened) {
+        console.log("App not installed, redirecting to Play Store...");
         window.location.replace(playStoreUrl);
       }
     }, timeout);
-    
-    // Add an event to confirm the user has the app installed (optional)
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
-        hasAppOpened = true;
+
+    // Listen for visibility change to detect if the app was opened
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        isAppOpened = true;
       }
-    });    
+    });
   };
 
-  const setButtonTextOnMount = () =>{
-    const currentUrl = 'https://develop.totum.com/discount/ambassador-snooker-and-pool-clubs/get_offer_totum_app';
+  const setButtonTextOnMount = () => {
+    const currentUrl =
+      "https://develop.totum.com/discount/ambassador-snooker-and-pool-clubs/get_offer_totum_app";
 
-    const appUrl = currentUrl.includes('/discount/')
-      ? 'nxtr://'
-      : 'nxtr://';
-    
-    const playStoreUrl = 'intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;';
-    const timeout = 500; // Time in milliseconds before redirecting to Play Store
-    let hasAppOpened = false;
-    
-    // Open the app using its custom URL scheme
-    // window.location.href = appUrl;
-    setButtonText("Open")
-    // Use a timeout to detect if the app was not installed
+    const appUrl = currentUrl.includes("/discount/") ? "nxtr://" : "nxtr://";
+    const timeout = 500;
+    let isAppOpened = false;
+
+    setButtonText("Open");
+
+    // Simulate app installation check
     setTimeout(() => {
-      if (!hasAppOpened) {
-        console.log('App not installed, redirecting to Play Store...');
-        setButtonText("Install")
-        // window.location.replace(playStoreUrl);
+      if (!isAppOpened) {
+        console.log("App not installed.");
+        setButtonText("Install");
       }
     }, timeout);
-  }
+  };
 
   useEffect(() => {
-    if(clickDone.currentUrl){
-      clickDone.current.click();
+    if (clickDoneRef.current) {
+      clickDoneRef.current.click();
     }
-  }, [hasAppOpened]);
+  }, []);
+
   return (
     <div className="App">
       <h3>{buttonText}</h3>
-      <button style={{display:'none'}} ref={clickDone} onClick={setButtonTextOnMount}>Okay</button>
+      {/* Hidden button for triggering initial logic */}
+      <button
+        style={{ display: "none" }}
+        ref={clickDoneRef}
+        onClick={setButtonTextOnMount}
+      >
+        Hidden Trigger
+      </button>
       <p>Market android check nxtr1223 added</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
-        alt=""
+        alt="Sample"
       />
       <div className="button-container">
-        {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
         <button className="btn2" onClick={handleOpen}>
           {buttonText}
         </button>
@@ -83,5 +87,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
