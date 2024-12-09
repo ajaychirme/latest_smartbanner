@@ -9,7 +9,7 @@ function App() {
     const currentUrl = 'https://develop.totum.com/discount/ambassador-snooker-and-pool-clubs/get_offer_totum_app';
 
     const appUrl = currentUrl.includes('/discount/')
-      ? `nxtr://open?url=${encodeURIComponent(currentUrl)}`
+      ? currentUrl
       : 'nxtr://nux.user.search';
     
     const playStoreUrl = 'intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;';
