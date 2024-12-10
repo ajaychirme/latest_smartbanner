@@ -2,33 +2,34 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  // const [buttonText, setButtonText] = useState("");
+  const buttonText = "Install";
 
-  // const handleOpen = () => {
-  //   // const appUrl = "https://nxtr://nux.user.search";
-  //   const appUrl = 'https://totum.com/discount';
-  //   const playStoreUrl = "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
-  //   const timeout = 500; // Time in milliseconds before redirecting to Play Store
-  //   let hasAppOpened = false;
+  const handleOpen = () => {
+    // const appUrl = "https://nxtr://nux.user.search";
+    const appUrl = "https://totum.com/discount";
+    const playStoreUrl =
+      "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
+    const timeout = 500; // Time in milliseconds before redirecting to Play Store
+    let hasAppOpened = false;
 
-  //   // Open the app using its custom URL scheme
-  //   window.location.href = appUrl;
+    // Open the app using its custom URL scheme
+    window.location.href = appUrl;
 
-  //   // Use a timeout to detect if the app was not installed
-  //   setTimeout(() => {
-  //     if (!hasAppOpened) {
-  //       console.log("App not installed, redirecting to Play Store...");
-  //       window.location.replace(playStoreUrl, "_blank");
-  //     }
-  //   }, timeout);
+    // Use a timeout to detect if the app was not installed
+    setTimeout(() => {
+      if (!hasAppOpened) {
+        console.log("App not installed, redirecting to Play Store...");
+        window.location.replace(playStoreUrl, "_blank");
+      }
+    }, timeout);
 
-  //   // Add an event to confirm the user has the app installed (optional)
-  //   document.addEventListener("visibilitychange", () => {
-  //     if (document.visibilityState === "hidden") {
-  //       hasAppOpened = true;
-  //     }
-  //   });
-  // };
+    // Add an event to confirm the user has the app installed (optional)
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        hasAppOpened = true;
+      }
+    });
+  };
 
   return (
     <div className="App">
@@ -41,8 +42,8 @@ function App() {
       />
       <div className="button-container">
         {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
-        <button className="btn2">
-          {/* {buttonText} */}
+        <button className="btn2" onClick={handleOpen}>
+          {buttonText}
         </button>
       </div>
     </div>
