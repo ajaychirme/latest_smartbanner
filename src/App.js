@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <h1>META ADDED</h1>
-      <h3>{buttonText}</h3>
+      {/* <h3>{buttonText}</h3> */}
       <p>Market android check nxtr1223 added</p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
@@ -41,8 +41,8 @@ function App() {
       />
       <div className="button-container">
         {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
-        <button className="btn2" onClick={handleOpen}>
-          {buttonText}
+        <button className="btn2">
+          {/* {buttonText} */}
         </button>
       </div>
     </div>
