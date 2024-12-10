@@ -1,4 +1,3 @@
-import { Callbacks } from "jquery";
 import "./App.css";
 import { useState, useEffect } from "react";
 
