@@ -1,8 +1,29 @@
+import { Callbacks } from "jquery";
 import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
   const buttonText = "Install";
+  // const [isIncognito, setIsIncognito] = useState(false);
+  // const detectIncognitoMode = (callback) => {
+  //   const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+  //   console.log("FS is =>",fs)
+  //   if (!fs) {
+  //     callback(false);
+  //   } else {
+  //     fs(
+  //       window.TEMPORARY,
+  //       100,
+  //       () => callback(false),
+  //       () => callback(true)
+  //     );
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   console.log("Inside use effect")
+  //   detectIncognitoMode((result) => setIsIncognito(result));
+  // }, []);
 
   const handleOpen = () => {
     // const appUrl = "https://nxtr://nux.user.search";
@@ -51,4 +72,3 @@ function App() {
 }
 
 export default App;
-
