@@ -27,7 +27,8 @@ function AppCheck() {
   const handleOpen = (data) => {
     // const appUrl = "https://nxtr://nux.user.search";
 
-    const appUrl = data==='offer'?"https://totum.com/discount/john-greed/offer":"https://totum.com/discount";
+    // const appUrl = data=='offer'?"https://totum.com/discount/john-greed/offer":"https://totum.com/discount";
+    const appUrl = "https://totum.com/discount";
     const playStoreUrl =
       "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
     const timeout = 500; // Time in milliseconds before redirecting to Play Store
