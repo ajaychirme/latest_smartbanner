@@ -57,15 +57,7 @@ function AppCheck() {
     console.log('Clicked');
         // Determine the appropriate app URL based on the current environment
         const currentUrl = window.location.href;
-        let appUrl = "https://totum.com/discount/john-greed/offer";
-        // if (currentUrl.includes('stg.totum.com')) {
-        //     appUrl = 'nxtr://totum.com/discount';
-        // } else if (currentUrl.includes('totum.com')) {
-        //     appUrl = 'https://totum.com/discount';
-        // } else {
-        //     return; // Fallback if no match is found
-        // }
-
+        let appUrl = "https://totum.com/discount";
         const playStoreUrl = 
             'intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;';
         const timeout = 500; // Time in milliseconds before redirecting to Play Store
@@ -91,6 +83,34 @@ function AppCheck() {
     
 };
 
+const handleOfferClick = (page) => {
+  console.log('Clicked');
+      // Determine the appropriate app URL based on the current environment
+      const currentUrl = window.location.href;
+      let appUrl = "https://totum.com/discount/john-greed/offer";
+      const playStoreUrl = 
+          'intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;';
+      const timeout = 500; // Time in milliseconds before redirecting to Play Store
+      let hasAppOpened = false;
+      // Open the app using its custom URL scheme
+      window.location.href = appUrl;
+      // Use a timeout to detect if the app was not installed
+      setTimeout(() => {
+          if (!hasAppOpened) {
+              console.log('App not installed, redirecting to Play Store...');
+              window.location.replace(playStoreUrl);
+          }
+      }, timeout);
+
+      // Add an event to confirm the user has the app installed (optional)
+      document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'hidden') {
+              hasAppOpened = true;
+          }
+      });
+  
+};
+
 
   return (
     <div className="App">
@@ -103,10 +123,10 @@ function AppCheck() {
       />
       <div className="button-container">
         {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
-        <button className="btn2" onClick={handleButtonClick('open')}>
+        <button className="btn2" onClick={handleButtonClick}>
           {buttonText}
         </button>
-        <button className="btn2" onClick={handleButtonClick('offer')}>
+        <button className="btn2" onClick={handleOfferClick}>
           Offer
         </button>
         
