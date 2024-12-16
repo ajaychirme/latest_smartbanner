@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 
-function App() {
+function AppCheck() {
   const buttonText = "Install";
   // const [isIncognito, setIsIncognito] = useState(false);
   // const detectIncognitoMode = (callback) => {
@@ -70,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppCheck;
