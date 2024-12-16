@@ -57,8 +57,7 @@ function AppCheck() {
     console.log('Clicked');
         // Determine the appropriate app URL based on the current environment
         const currentUrl = window.location.href;
-        let appUrl = page==='offer'?"https://totum.com/discount/john-greed/offer":'https://totum.com/discount';
-
+        let appUrl = "https://totum.com/discount/john-greed/offer";
         // if (currentUrl.includes('stg.totum.com')) {
         //     appUrl = 'nxtr://totum.com/discount';
         // } else if (currentUrl.includes('totum.com')) {
