@@ -1,14 +1,31 @@
-import "./App.css";
 import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Offer from "./components/Offer";
+import BeautyDiscount from "./components/BeautyDiscount";
+import Discoubts from "./components/Discoubts";
+import BrandsPage from "./components/BrandsPage";
+import SearchResults from "./components/SearchResults";
 
-function AppCheck() {
-  const buttonText = "Install";
-
-  const handleButtonClick = (isOffer = false) => {
-    console.log('Clicked');
+function App() {
+  // Common button handler function
+  const handleButtonClick = (componentName, slug) => {
+    console.log(`Button clicked in ${componentName} component`);
+    console.log(`Slug is ${slug}.`);
+    // Add your specific logic here (e.g., API call, navigation, or state change;
+    console.log("Clicked");
     // Determine the appropriate app URL based on the button clicked
-    const appUrl = isOffer
+
+    // /discount/
+    //
+
+    const appUrl = slug.includes("/offer")
       ? "https://totum.com/discount/john-greed/offer"
+      : slug.includes("/beauty-discount")
+      ? "https://totum.com/discounts/beauty"
+      :slug.includes("/discounts" || "/search-results")
+      ? "https://totum.com/discount"
+      :slug.includes("/brands-page")
+      ? "https://totum.com/discount/cult-beauty"
       : "https://totum.com/discount";
     const playStoreUrl =
       "intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;";
@@ -35,23 +52,57 @@ function AppCheck() {
   };
 
   return (
-    <div className="App">
-      <h1>META ADDED69</h1>
-      <p>Market android check nxtr1223 added</p>
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy8L1HIH2ZlhTcSR2x5c993GIA6DFFs06YEg&s"
-        alt=""
-      />
-      <div className="button-container">
-        <button className="btn2" onClick={() => handleButtonClick(false)}>
-          {buttonText}
-        </button>
-        <button className="btn2" onClick={() => handleButtonClick(true)}>
-          Offer
-        </button>
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/offer">Offer</Link>
+            </li>
+            <li>
+              <Link to="/beauty-discount">Beauty-discount</Link>
+            </li>
+            <li>
+              <Link to="/discounts">Discounts</Link>
+            </li>
+            <li>
+              <Link to="/brands-page">Brands Page</Link>
+            </li>
+            <li>
+              <Link to="/search-results">Search results</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Define routes here */}
+        <Routes>
+          <Route
+            path="/offer"
+            element={<Offer handleButtonClick={handleButtonClick} />}
+          />
+          <Route
+            path="/beauty-discount"
+            element={<BeautyDiscount handleButtonClick={handleButtonClick} />}
+          />
+          <Route
+            path="/discounts"
+            element={<Discoubts handleButtonClick={handleButtonClick} />}
+          />
+          <Route
+            path="/brands-page"
+            element={<BrandsPage handleButtonClick={handleButtonClick} />}
+          />
+          <Route
+            path="/search-results"
+            element={<SearchResults handleButtonClick={handleButtonClick} />}
+          />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
-export default AppCheck;
+export default App;
