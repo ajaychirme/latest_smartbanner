@@ -55,23 +55,17 @@ function AppCheck() {
 
   const handleButtonClick = () => {
     console.log('Clicked');
-
-    const ua = navigator.userAgent || navigator.vendor || '';
-    const isAndroid = /Android|webOS|BlackBerry|IEMobile|Mobile|CriOS/i.test(ua);
-    console.log('IsAndroid =>', isAndroid);
-
-    if (isAndroid) {
         // Determine the appropriate app URL based on the current environment
         const currentUrl = window.location.href;
-        let appUrl = '';
+        let appUrl = 'https://totum.com/discount';
 
-        if (currentUrl.includes('stg.totum.com')) {
-            appUrl = 'nxtr://totum.com/discount';
-        } else if (currentUrl.includes('totum.com')) {
-            appUrl = 'https://totum.com/discount';
-        } else {
-            return; // Fallback if no match is found
-        }
+        // if (currentUrl.includes('stg.totum.com')) {
+        //     appUrl = 'nxtr://totum.com/discount';
+        // } else if (currentUrl.includes('totum.com')) {
+        //     appUrl = 'https://totum.com/discount';
+        // } else {
+        //     return; // Fallback if no match is found
+        // }
 
         const playStoreUrl = 
             'intent://details?id=com.totum.student#Intent;scheme=market;package=com.android.vending;end;';
@@ -95,7 +89,7 @@ function AppCheck() {
                 hasAppOpened = true;
             }
         });
-    }
+    
 };
 
 
