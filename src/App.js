@@ -24,7 +24,7 @@ function AppCheck() {
   //   detectIncognitoMode((result) => setIsIncognito(result));
   // }, []);
 
-  const handleOpen = (data) => {
+  const handleOpen = () => {
     // const appUrl = "https://nxtr://nux.user.search";
 
     // const appUrl = data=='offer'?"https://totum.com/discount/john-greed/offer":"https://totum.com/discount";
@@ -55,7 +55,7 @@ function AppCheck() {
 
   return (
     <div className="App">
-      <h1>META ADDED123</h1>
+      <h1>META ADDED69</h1>
       {/* <h3>{buttonText}</h3> */}
       <p>Market android check nxtr1223 added</p>
       <img
@@ -64,11 +64,8 @@ function AppCheck() {
       />
       <div className="button-container">
         {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
-        <button className="btn2" onClick={handleOpen(buttonText)}>
+        <button className="btn2" onClick={handleOpen}>
           {buttonText}
-        </button>
-        <button className="btn2" onClick={handleOpen('offer')}>
-          Open discount (johngreed)
         </button>
       </div>
     </div>
