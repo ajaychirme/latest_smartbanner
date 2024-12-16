@@ -53,11 +53,11 @@ function AppCheck() {
   //   });
   // };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (page) => {
     console.log('Clicked');
         // Determine the appropriate app URL based on the current environment
         const currentUrl = window.location.href;
-        let appUrl = 'https://totum.com/discount';
+        let appUrl = page==='offer'?"https://totum.com/discount/john-greed/offer":'https://totum.com/discount';
 
         // if (currentUrl.includes('stg.totum.com')) {
         //     appUrl = 'nxtr://totum.com/discount';
@@ -104,9 +104,13 @@ function AppCheck() {
       />
       <div className="button-container">
         {/* <button className="btn" onClick={handleInstall}>Install the app</button> */}
-        <button className="btn2" onClick={handleButtonClick}>
+        <button className="btn2" onClick={handleButtonClick('open')}>
           {buttonText}
         </button>
+        <button className="btn2" onClick={handleButtonClick('offer')}>
+          Offer
+        </button>
+        
       </div>
     </div>
   );
